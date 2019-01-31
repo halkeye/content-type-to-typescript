@@ -17,6 +17,7 @@ program
     'This is the access token for this space. You can generate the token in the Contentful web app. Learn more at https://www.contentful.com/developers/docs/references/authentication/',
   )
   .option('--space <space>', 'This is the space ID')
+  .option('--environment <environment>', 'This is the environment, defaults to "master"')
   .option('--output <output>', 'Output filename: e.g. -o ./types.ts')
   .option('--prefix <prefix>', 'prefix used for interface names e.g. "Contentful"');
 
@@ -24,10 +25,10 @@ program.on('--help', () => {
   console.log('  Examples:');
   console.log('');
   console.log(
-    '    $ content-type-to-typescript --access-token <token> --space <space> --output <filename>',
+    '    $ content-type-to-typescript --access-token <token> --space <space> --environment <environment> --output <filename>',
   );
   console.log(
-    '    $ content-type-to-typescript --access-token=<token> --space=<space> --output=<filename>',
+    '    $ content-type-to-typescript --access-token=<token> --space=<space> --environment <environment> --output=<filename>',
   );
   console.log('');
 });
@@ -43,6 +44,7 @@ ensureArgNotEmpty(program.output, 'Output file path is missing.');
 compileFromSpace({
   accessToken: program.accessToken,
   space: program.space,
+  environment: program.environment || 'master',
   output: program.output,
   prefix: program.prefix,
 })

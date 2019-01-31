@@ -6,14 +6,17 @@ import { logError, logSuccess } from './log';
 async function fetchContentTypes({
   accessToken,
   space,
+  environment,
 }: {
   accessToken: string;
   space: string;
+  environment: string;
 }): Promise<ContentType[]> {
   try {
     const client = createClient({
       accessToken,
       space,
+      environment,
     });
 
     let skip = 0;
@@ -63,15 +66,17 @@ function writeFile(output: string, ts: string): Promise<void> {
 export default async function({
   accessToken,
   space,
+  environment,
   output,
   prefix,
 }: {
   accessToken: string;
   space: string;
+  environment: string;
   output: string;
   prefix?: string
 }) {
-  const contentTypes = await fetchContentTypes({ accessToken, space });
+  const contentTypes = await fetchContentTypes({ accessToken, space, environment });
 
   const ts = await compile(contentTypes, prefix);
 
