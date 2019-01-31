@@ -32,6 +32,7 @@ function fieldToJsonSchema(fieldInfo: ContentfulField, prefix: string): any {
   switch (fieldInfo.type) {
     case 'Symbol':
     case 'Text':
+    case 'RichText':
     case 'Date':
       result = {
         type: 'string',
