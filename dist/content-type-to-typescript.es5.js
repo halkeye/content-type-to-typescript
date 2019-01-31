@@ -89,23 +89,25 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
     return t;
 };
 var toInterfaceName = function (s, prefix) {
-    return prefix + lodash.upperFirst(
-    // remove accents, umlauts, ... by their basic latin letters
-    lodash.deburr(s)
-        .replace(/(^\s*[^a-zA-Z_$])|([^a-zA-Z_$\d])/g, ' ')
-        .replace(/^_[a-z]/g, function (match) { return match.toUpperCase(); })
-        .replace(/_[a-z]/g, function (match) { return match.substr(1, match.length).toUpperCase(); })
-        .replace(/([\d$]+[a-zA-Z])/g, function (match) { return match.toUpperCase(); })
-        .replace(/\s+([a-zA-Z])/g, function (match) {
-        return lodash.trim(match.toUpperCase());
-    })
-        .replace(/\s/g, ''));
+    return (prefix +
+        lodash.upperFirst(
+        // remove accents, umlauts, ... by their basic latin letters
+        lodash.deburr(s)
+            .replace(/(^\s*[^a-zA-Z_$])|([^a-zA-Z_$\d])/g, ' ')
+            .replace(/^_[a-z]/g, function (match) { return match.toUpperCase(); })
+            .replace(/_[a-z]/g, function (match) { return match.substr(1, match.length).toUpperCase(); })
+            .replace(/([\d$]+[a-zA-Z])/g, function (match) { return match.toUpperCase(); })
+            .replace(/\s+([a-zA-Z])/g, function (match) {
+            return lodash.trim(match.toUpperCase());
+        })
+            .replace(/\s/g, '')));
 };
 function fieldToJsonSchema(fieldInfo, prefix) {
     var result;
     switch (fieldInfo.type) {
         case 'Symbol':
         case 'Text':
+        case 'RichText':
         case 'Date':
             result = {
                 type: 'string',
@@ -149,15 +151,16 @@ function fieldToJsonSchema(fieldInfo, prefix) {
             }
             else if (fieldInfo.linkType === 'Entry') {
                 var linkType = 'any';
-                if (fieldInfo.validations &&
-                    fieldInfo.validations.length > 0) {
+                if (fieldInfo.validations && fieldInfo.validations.length > 0) {
                     var validation = fieldInfo.validations.find(function (v) {
                         return v.hasOwnProperty('linkContentType');
                     });
                     if (validation && validation.linkContentType && validation.linkContentType.length > 0) {
-                        linkType = validation.linkContentType.map(function (s) {
+                        linkType = validation.linkContentType
+                            .map(function (s) {
                             return toInterfaceName(s, prefix);
-                        }).join(' | ');
+                        })
+                            .join(' | ');
                     }
                 }
                 result = {
