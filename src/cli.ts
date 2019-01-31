@@ -25,10 +25,12 @@ program.on('--help', () => {
   console.log('  Examples:');
   console.log('');
   console.log(
-    '    $ content-type-to-typescript --access-token <token> --space <space> --environment <environment> --output <filename>',
+    '    $ content-type-to-typescript --access-token <token> --space <space> ' +
+      '--environment <environment> --output <filename>',
   );
   console.log(
-    '    $ content-type-to-typescript --access-token=<token> --space=<space> --environment <environment> --output=<filename>',
+    '    $ content-type-to-typescript --access-token=<token> --space=<space> ' +
+      '--environment <environment> --output=<filename>',
   );
   console.log('');
 });

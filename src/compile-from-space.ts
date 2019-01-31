@@ -20,10 +20,10 @@ async function fetchContentTypes({
     });
 
     let skip = 0;
-    let contentTypes: any[] = []
+    let contentTypes: any[] = [];
     while (true) {
-      const { items, total } = await client.getContentTypes({skip});
-      contentTypes = contentTypes.concat(items)
+      const { items, total } = await client.getContentTypes({ skip });
+      contentTypes = contentTypes.concat(items);
       skip += items.length;
 
       if (skip >= total) {
@@ -74,7 +74,7 @@ export default async function({
   space: string;
   environment: string;
   output: string;
-  prefix?: string
+  prefix?: string;
 }) {
   const contentTypes = await fetchContentTypes({ accessToken, space, environment });
 
