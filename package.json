@@ -34,7 +34,7 @@
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc && rollup -c rollup.config.ts && rimraf compiled",
-    "start": "tsc -w & rollup -c rollup.config.ts -w",
+    "start": "tsc -w && rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
