@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`100 content types 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
@@ -610,7 +610,7 @@ export interface ContentType9A {
 `;
 
 exports[`All fields 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
@@ -652,7 +652,7 @@ export interface Location {
 `;
 
 exports[`Content Type with omitted field 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
@@ -664,7 +664,7 @@ export interface ModelWithOmitteField {
 `;
 
 exports[`Multiple types 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
@@ -701,7 +701,7 @@ export interface Location {
 `;
 
 exports[`Multiple types with non unique field id 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
@@ -716,7 +716,7 @@ export interface Post2 {
 `;
 
 exports[`Parse descirption 1`] = `
-"import { Asset, Entry } from 'contentful';/**
+"import { Asset, Entry, Document } from 'contentful';/**
  * This file was automatically generated.
  * DO NOT MODIFY IT BY HAND.
  */
