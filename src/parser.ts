@@ -21,7 +21,7 @@ export const toInterfaceName = (s: string, prefix: string): string => {
       })
       // remove remaining whitespace
       .replace(/\s/g, ''));
-}
+};
 
 function fieldToJsonSchema(fieldInfo: ContentfulField, prefix: string): any {
   let result: any;
@@ -61,6 +61,11 @@ function fieldToJsonSchema(fieldInfo: ContentfulField, prefix: string): any {
       result = {
         items: fieldToJsonSchema(fieldInfo.items, prefix),
         type: 'array',
+      };
+      break;
+    case 'RichText':
+      result = {
+        tsType: 'Document',
       };
       break;
     case 'Link':

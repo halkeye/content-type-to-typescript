@@ -42,7 +42,7 @@ export async function compileFromContentTypes(
 
   const res = await compile(resultSchema as JSONSchema4, EPHEMERAL_ROOT, settings);
 
-  const contentFulTypeImport = 'import { Asset, Entry } from \'contentful\';';
+  const contentFulTypeImport = 'import { Asset, Entry, Document } from \'contentful\';';
 
   return cleanupEphemeralRoot(contentFulTypeImport + res);
 }
