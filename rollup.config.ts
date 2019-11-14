@@ -7,7 +7,7 @@ const pkg = require('./package.json');
 
 export default [
   {
-    input: `compiled/${pkg.name}.js`,
+    input: `compiled/content-type-to-typescript.js`,
     output: [{ file: pkg.main, format: 'cjs' }],
     sourcemap: true,
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
@@ -28,7 +28,7 @@ export default [
     ],
     sourcemap: true,
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-    external: ['lodash', 'contentful', 'json-schema-to-typescript', 'commander', 'chalk'],
+    external: ['lodash', 'contentful', 'contentful-management', 'json-schema-to-typescript', 'commander', 'chalk'],
     watch: {
       include: 'compiled/**',
     },

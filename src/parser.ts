@@ -1,6 +1,6 @@
+import { ContentType, Field, FieldItem } from 'contentful';
 import { chain, deburr, trim, upperFirst } from 'lodash';
 import { buildRef, Location } from './built-in-definitions';
-import { ContentfulField, ContentType } from './types/contentful';
 import { JSONSchema } from './types/json-schema';
 
 export const toInterfaceName = (s: string, prefix: string): string => {
@@ -23,7 +23,7 @@ export const toInterfaceName = (s: string, prefix: string): string => {
       .replace(/\s/g, ''));
 };
 
-function fieldToJsonSchema(fieldInfo: ContentfulField, prefix: string): any {
+function fieldToJsonSchema(fieldInfo: Field | FieldItem, prefix: string): any {
   let result: any;
   switch (fieldInfo.type) {
     case 'Symbol':
@@ -95,8 +95,6 @@ function fieldToJsonSchema(fieldInfo: ContentfulField, prefix: string): any {
         throw new Error('Unexpected Content Type structure.');
       }
       break;
-    default:
-      throw new Error(`Type ${fieldInfo.type} is not yet supported`);
   }
 
   return result;

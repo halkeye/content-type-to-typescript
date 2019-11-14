@@ -1,29 +1,28 @@
-import { ContentType, createClient } from 'contentful';
+import { ContentType } from 'contentful';
+import { createClient } from 'contentful-management';
 import * as fs from 'fs';
 import { compileFromContentTypes } from './content-type-to-typescript';
 import { logError, logSuccess } from './log';
 
 async function fetchContentTypes({
   accessToken,
-  space,
-  environment,
+  spaceId,
+  environmentId,
 }: {
   accessToken: string;
-  space: string;
-  environment: string;
+  spaceId: string;
+  environmentId: string;
 }): Promise<ContentType[]> {
   try {
-    const client = createClient({
-      accessToken,
-      space,
-      environment,
-    });
+    const client = createClient({ accessToken });
+    const space = await client.getSpace(spaceId);
+    const environment = await space.getEnvironment(environmentId);
 
     let skip = 0;
-    let contentTypes: any[] = []
+    let contentTypes: any[] = [];
     while (true) {
-      const { items, total } = await client.getContentTypes({skip});
-      contentTypes = contentTypes.concat(items)
+      const { items, total } = await environment.getContentTypes({skip});
+      contentTypes = contentTypes.concat(items);
       skip += items.length;
 
       if (skip >= total) {
@@ -33,7 +32,11 @@ async function fetchContentTypes({
 
     return contentTypes;
   } catch (err) {
-    logError(err.response.data.message);
+    if (err.response && err.response.data) {
+      logError(err.response.data.message);
+    } else {
+      logError(err);
+    }
 
     throw err;
   }
@@ -65,18 +68,18 @@ function writeFile(output: string, ts: string): Promise<void> {
 
 export default async function({
   accessToken,
-  space,
-  environment,
+  spaceId,
+  environmentId,
   output,
   prefix,
 }: {
   accessToken: string;
-  space: string;
-  environment: string;
+  spaceId: string;
+  environmentId: string;
   output: string;
   prefix?: string
 }) {
-  const contentTypes = await fetchContentTypes({ accessToken, space, environment });
+  const contentTypes = await fetchContentTypes({ accessToken, spaceId, environmentId });
 
   const ts = await compile(contentTypes, prefix);
 

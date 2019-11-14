@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 
 // tslint:disable:no-console
 export const log = (message: string) => console.log(message);

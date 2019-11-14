@@ -1,4 +1,4 @@
-import program from 'commander';
+import * as program from 'commander';
 import compileFromSpace from './compile-from-space';
 import { logError } from './log';
 // tslint:disable:no-console
@@ -43,10 +43,13 @@ ensureArgNotEmpty(program.output, 'Output file path is missing.');
 
 compileFromSpace({
   accessToken: program.accessToken,
-  space: program.space,
-  environment: program.environment || 'master',
+  spaceId: program.space,
+  environmentId: program.environment || 'master',
   output: program.output,
   prefix: program.prefix,
 })
   .then(() => process.exit())
-  .catch(() => process.exit(1));
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
