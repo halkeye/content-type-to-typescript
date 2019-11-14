@@ -5,16 +5,16 @@ import { compileFromContentTypes } from './content-type-to-typescript';
 import { logError, logSuccess } from './log';
 
 async function fetchContentTypes({
-  accessToken,
+  managementToken,
   spaceId,
   environmentId,
 }: {
-  accessToken: string;
+  managementToken: string;
   spaceId: string;
   environmentId: string;
 }): Promise<ContentType[]> {
   try {
-    const client = createClient({ accessToken });
+    const client = createClient({ accessToken: managementToken });
     const space = await client.getSpace(spaceId);
     const environment = await space.getEnvironment(environmentId);
 
@@ -67,19 +67,19 @@ function writeFile(output: string, ts: string): Promise<void> {
 }
 
 export default async function({
-  accessToken,
+  managementToken,
   spaceId,
   environmentId,
   output,
   prefix,
 }: {
-  accessToken: string;
+  managementToken: string;
   spaceId: string;
   environmentId: string;
   output: string;
   prefix?: string
 }) {
-  const contentTypes = await fetchContentTypes({ accessToken, spaceId, environmentId });
+  const contentTypes = await fetchContentTypes({ managementToken, spaceId, environmentId });
 
   const ts = await compile(contentTypes, prefix);
 

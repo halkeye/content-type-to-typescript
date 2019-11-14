@@ -12,9 +12,9 @@ const ensureArgNotEmpty = (value: string, message: string): void => {
 
 program
   .option(
-    '--access-token <accessToken>',
+    '--management-token <managementToken>',
     // tslint:disable-next-line:max-line-length
-    'This is the access token for this space. You can generate the token in the Contentful web app. Learn more at https://www.contentful.com/developers/docs/references/authentication/',
+    'This is the management token for this space. You can generate the token in the Contentful web app. Learn more at https://www.contentful.com/developers/docs/references/authentication/',
   )
   .option('--space <space>', 'This is the space ID')
   .option('--environment <environment>', 'This is the environment, defaults to "master"')
@@ -25,10 +25,10 @@ program.on('--help', () => {
   console.log('  Examples:');
   console.log('');
   console.log(
-    '    $ content-type-to-typescript --access-token <token> --space <space> --environment <environment> --output <filename>',
+    '    $ content-type-to-typescript --management-token <token> --space <space> --environment <environment> --output <filename>',
   );
   console.log(
-    '    $ content-type-to-typescript --access-token=<token> --space=<space> --environment <environment> --output=<filename>',
+    '    $ content-type-to-typescript --management-token=<token> --space=<space> --environment <environment> --output=<filename>',
   );
   console.log('');
 });
@@ -37,12 +37,12 @@ program.parse(process.argv);
 
 // tslint:disable:no-console
 
-ensureArgNotEmpty(program.accessToken, 'Access token is missing.');
+ensureArgNotEmpty(program.managementToken, 'Management token is missing.');
 ensureArgNotEmpty(program.space, 'Space is missing.');
 ensureArgNotEmpty(program.output, 'Output file path is missing.');
 
 compileFromSpace({
-  accessToken: program.accessToken,
+  managementToken: program.managementToken,
   spaceId: program.space,
   environmentId: program.environment || 'master',
   output: program.output,
