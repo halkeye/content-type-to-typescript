@@ -24,7 +24,7 @@
   "author": "Sergii Bezliudnyi <serg.bezludny@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sbezludny/content-type-to-typescript"
+    "url": "https://github.com/halkeye/content-type-to-typescript"
   },
   "license": "MIT",
   "engines": {
