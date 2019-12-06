@@ -1,6 +1,6 @@
 {
   "name": "@halkeye/content-type-to-typescript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compile Contentful Models to TypeScript type definitions",
   "keywords": [
     "contentful",
